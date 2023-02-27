@@ -3,6 +3,8 @@ package com.techacademy.controller;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.techacademy.entity.Authentication;
 import com.techacademy.entity.Employee;
-import com.techacademy.service.AuthenticationService;
 import com.techacademy.service.EmployeeService;
 
 @Controller
 @RequestMapping("employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -50,8 +53,11 @@ public class EmployeeController {
             return getRegister(employee);
         }
         employee.setDeleteFlag(0);
-        employee.getAuthentication().setValidDate(Date.valueOf(LocalDate.now().plusYears(5)));
-        employee.getAuthentication().setEmployee(employee);
+        Authentication authentication = employee.getAuthentication();
+        String password = passwordEncoder.encode(authentication.getPassword());
+        authentication.setPassword(password);
+        authentication.setValidDate(Date.valueOf(LocalDate.now().plusYears(5)));
+        authentication.setEmployee(employee);
         employeeService.saveEmployee(employee);
         return "redirect:/employee/list";
     }
@@ -76,7 +82,8 @@ public class EmployeeController {
         Authentication authentication = employee.getAuthentication();
         dbEmployee.setName(employee.getName());
         if (authentication.getPassword() != "") {
-            dbAuthentication.setPassword(authentication.getPassword());
+            String password = passwordEncoder.encode(authentication.getPassword());
+            dbAuthentication.setPassword(password);
         }
         dbAuthentication.setRole(authentication.getRole());
         employeeService.saveEmployee(dbEmployee);
