@@ -22,11 +22,9 @@ import com.techacademy.service.EmployeeService;
 @RequestMapping("employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
-    private final AuthenticationService authenticationService;
 
-    public EmployeeController(EmployeeService employeeService, AuthenticationService authService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.authenticationService = authService;
     }
 
     @GetMapping("/list")
@@ -54,7 +52,6 @@ public class EmployeeController {
         // Error Code Password
         employee.setDeleteFlag(0);
         employee.getAuthentication().setValidDate(Date.valueOf(LocalDate.now().plusYears(5)));
-        // Why add
         employee.getAuthentication().setEmployee(employee);
         employeeService.saveEmployee(employee);
         return "redirect:/employee/list";
@@ -75,51 +72,23 @@ public class EmployeeController {
         if (res.hasErrors()) {
             return getUpdate(null, model);
         }
-        /*
-        // Edit ID?
         Employee dbEmployee = employeeService.getEmployee(employee.getId());
         Authentication dbAuthentication = dbEmployee.getAuthentication();
         Authentication authentication = employee.getAuthentication();
-        if(dbAuthentication.getCode() != authentication.getCode()) {
-           if(authentication.getPassword() == "") {
-               authentication.setPassword(dbAuthentication.getPassword());
-           }
-           dbEmployee
-           authentication.setValidDate(dbAuthentication.getValidDate());
-           authentication.setEmployee(dbEmployee);
-           dbEmployee.setAuthentication(authentication);
-           employeeService.saveEmployee(dbEmployee);
-           authenticationService.deleteAuthentication(dbAuthentication);
-        }
-
-
-        Employee destEmployee = employeeService.getEmployee(employee.getId());
-        Authentication destAuthentication = destEmployee.getAuthentication();
-
-        if (destAuthentication.getCode() != authentication.getCode()) {
-            destAuthentication.setCode(authentication.getCode());
-            destEmployee.setName(employee.getName());
-            if (authentication.getPassword() != "") {
-                destAuthentication.setPassword(authentication.getPassword());
-            }
-
-
-            authenticationService.deleteAuthentication(destAuthentication);
-        }
-
-        destEmployee.setName(employee.getName());
+        dbEmployee.setName(employee.getName());
         if (authentication.getPassword() != "") {
-            destAuthentication.setPassword(authentication.getPassword());
+            dbAuthentication.setPassword(authentication.getPassword());
         }
-        destAuthentication.setRole(authentication.getRole());
-        employeeService.saveEmployee(destEmployee);
-        */
+        dbAuthentication.setRole(authentication.getRole());
+        employeeService.saveEmployee(dbEmployee);
         return "redirect:/employee/list";
     }
 
-    @PostMapping("/delete")
-    public String getDelete() {
-        return "index";
+    @PostMapping("/delete/{id}")
+    public String getDelete(Employee employee) {
+        Employee dbEmployee = employeeService.getEmployee(employee.getId());
+        dbEmployee.setDeleteFlag(1);
+        employeeService.saveEmployee(dbEmployee);
+        return "redirect:/employee/list";
     }
-
 }

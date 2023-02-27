@@ -6,14 +6,13 @@
 </head>
 <body>
     <h1 th:text="'id : ' + ${employee.id} + ' の従業員情報 詳細ページ'"></h1>
-    <form method="post" th:action="@{/employee/update/{id}/(id=${id})}" th:object="${employee}">
+    <form method="post" th:object="${employee}">
         <label for="code">社員番号</label>
-        <input type="text" th:field="*{authentication.code}" th:errorclass="err">
-        <span th:error="*{authentication.code}" class="err"></span>
+        <input type="text" th:field="*{authentication.code}" readonly>
         <br>
         <label for="name">氏名</label>
         <input type="text" th:field="*{name}" th:errorclass="err">
-        <span th:error="*{name}" class="err"></span>
+        <span th:errors="*{name}" class="err"></span>
         <br>
         <label for="password">パスワード</label>
         <input type="text" th:field="*{authentication.password}">
@@ -23,9 +22,9 @@
             <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}"
                     th:value="${item}" th:text="${item}" th:selected="*{authentication.role} == ${item}">
         </select>
-        <span th:error="*{authentication.role}" class="err"></span>
         <br>
-        <input type="submit" value="登録">
+        <input type="submit" th:formaction="@{/employee/update/{id}/(id=${id})}" value="登録">
+        <input type="submit" th:formaction="@{/employee/delete/{id}/(id=${id})}" value="削除">
         <br>
         <a th:href="@{/employee/list}">一覧に戻る</a>
     </form>

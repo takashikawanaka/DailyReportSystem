@@ -11,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.Data;
@@ -33,6 +35,7 @@ public class Employee {
 
     @Column(length = 20, nullable = false)
     @NotEmpty
+    @Length(max = 20)
     private String name;
 
     @Column(nullable = false)
@@ -47,5 +50,6 @@ public class Employee {
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    @Valid
     private Authentication authentication;
 }
