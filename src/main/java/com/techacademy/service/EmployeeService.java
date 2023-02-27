@@ -29,9 +29,4 @@ public class EmployeeService {
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-
-    @Transactional
-    public void deleteEmployee(Set<Integer> idck) {
-        //edit
-    }
 }
