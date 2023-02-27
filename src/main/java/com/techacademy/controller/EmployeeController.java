@@ -49,7 +49,6 @@ public class EmployeeController {
         if (res.hasErrors()) {
             return getRegister(employee);
         }
-        // Error Code Password
         employee.setDeleteFlag(0);
         employee.getAuthentication().setValidDate(Date.valueOf(LocalDate.now().plusYears(5)));
         employee.getAuthentication().setEmployee(employee);
