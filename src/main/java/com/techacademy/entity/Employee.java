@@ -1,19 +1,30 @@
 package com.techacademy.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "employee")
+@Where(clause = "delete_flag = 0")
 public class Employee {
 
     @Id
@@ -21,15 +32,28 @@ public class Employee {
     private Integer id;
 
     @Column(length = 20, nullable = false)
+    @NotEmpty
     private String name;
 
     @Column(nullable = false)
-    private Integer delete_flag;
+    private Integer deleteFlag;
+
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private Date created_at;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    private Date updated_at;
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    private Authentication authentication;
 
+    @PreRemove
+    @Transactional
+    private void preRemove() {
+        if (authentication != null) {
+            authentication.setEmployee(null);
+        }
+    }
 }
