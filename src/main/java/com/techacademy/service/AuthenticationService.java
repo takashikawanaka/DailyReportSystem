@@ -13,9 +13,4 @@ public class AuthenticationService {
     public AuthenticationService(AuthenticationRepository repository) {
         this.authenticationRepository = repository;
     }
-
-    @Transactional
-    public void deleteAuthentication(Authentication authentication) {
-        authenticationRepository.delete(authentication);
-    }
 }
