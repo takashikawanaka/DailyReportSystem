@@ -1,58 +1,58 @@
 package com.techacademy.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "employee")
-@Where(clause = "delete_flag = 0")
-public class Employee {
+@Table(name = "report")
+public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 20, nullable = false)
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    private LocalDate reportDate;
+
+    @Column(length = 255, nullable = false)
     @NotEmpty
-    @Length(max = 20)
-    private String name;
+    @Length(max = 255)
+    private String title;
 
     @Column(nullable = false)
-    private Integer deleteFlag;
+    @Type(type = "text")
+    @NotEmpty
+    private String content;
 
-    @Column(nullable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false, referencedColumnName = "id")
+    private Employee employee;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    @Valid
-    private Authentication authentication;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<Report> reports;
-
 }

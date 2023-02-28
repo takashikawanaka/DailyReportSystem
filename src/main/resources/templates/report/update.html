@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>日報 編集ページ</h1>
+    <form method="post" th:action="@{/report/update/{id}/(id=${report.id})}" th:object="${report}">
+        <label for="reportDate">日付</label>
+        <input type="date" th:field="*{reportDate}" th:errorclass="err">
+        <span th:errors="*{reportDate}" class="err"></span>
+        <br>
+        <label for="name">氏名</label>
+        <input type="text" th:field="*{employee.name}" disabled>
+        <br>
+        <label for="title">タイトル</label>
+        <input type="text" th:field="*{title}" th:errorclass="err">
+        <span th:errors="*{title}" class="err"></span>
+        <br>
+        <label for="content">内容</label>
+        <textarea th:field="*{content}" th:errorclass="err"></textarea>
+        <span th:errors="*{content}" class="err"></span>
+        <br>
+        <input type="submit" value="登録">
+        <br>
+        <a th:href="@{/report}">一覧に戻る</a>
+    </form>
+</body>
+</html>

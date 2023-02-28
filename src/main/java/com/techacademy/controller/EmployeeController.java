@@ -26,11 +26,11 @@ public class EmployeeController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController(EmployeeService service) {
+        this.employeeService = service;
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public String getEmployeeList(Model model) {
         model.addAttribute("employeelist", employeeService.getEmployeeList());
         return "employee/list";
@@ -59,7 +59,7 @@ public class EmployeeController {
         authentication.setValidDate(Date.valueOf(LocalDate.now().plusYears(5)));
         authentication.setEmployee(employee);
         employeeService.saveEmployee(employee);
-        return "redirect:/employee/list";
+        return "redirect:/employee";
     }
 
     @GetMapping("/update/{id}")
@@ -75,7 +75,9 @@ public class EmployeeController {
     @PostMapping("/update/{id}")
     public String postUpdate(@Validated Employee employee, BindingResult res, Model model) {
         if (res.hasErrors()) {
-            return getUpdate(null, model);
+            if (res.getErrorCount() != 1 && !res.hasFieldErrors("authentication.password")) {
+                return getUpdate(null, model);
+            }
         }
         Employee dbEmployee = employeeService.getEmployee(employee.getId());
         Authentication dbAuthentication = dbEmployee.getAuthentication();
@@ -87,7 +89,7 @@ public class EmployeeController {
         }
         dbAuthentication.setRole(authentication.getRole());
         employeeService.saveEmployee(dbEmployee);
-        return "redirect:/employee/list";
+        return "redirect:/employee";
     }
 
     @PostMapping("/delete/{id}")
@@ -95,6 +97,6 @@ public class EmployeeController {
         Employee dbEmployee = employeeService.getEmployee(employee.getId());
         dbEmployee.setDeleteFlag(1);
         employeeService.saveEmployee(dbEmployee);
-        return "redirect:/employee/list";
+        return "redirect:/employee";
     }
 }

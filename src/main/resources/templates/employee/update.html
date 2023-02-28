@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1 th:text="'id : ' + ${employee.id} + ' の従業員情報 詳細ページ'"></h1>
-    <form method="post" th:object="${employee}">
+    <form method="post" th:action="@{/employee}" th:object="${employee}">
         <!--  NotEdit Code -->
         <label for="code">社員番号</label>
         <input type="text" th:field="*{authentication.code}" readonly>
@@ -24,10 +24,10 @@
                     th:value="${item}" th:text="${item}" th:selected="*{authentication.role} == ${item}">
         </select>
         <br>
-        <input type="submit" th:formaction="@{/employee/update/{id}/(id=${id})}" value="登録">
-        <input type="submit" th:formaction="@{/employee/delete/{id}/(id=${id})}" value="削除">
+        <input type="submit" th:formaction="@{/employee/update/{id}/(id=*{id})}" value="登録">
+        <input type="submit" th:formaction="@{/employee/delete/{id}/(id=*{id})}" value="削除">
         <br>
-        <a th:href="@{/employee/list}">一覧に戻る</a>
+        <a th:href="@{/employee}">一覧に戻る</a>
     </form>
 </body>
 </html>

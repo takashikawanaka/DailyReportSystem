@@ -5,19 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h1 th:text="'id : ' + ${employee.id} + ' の従業員情報 詳細ページ'"></h1>
-    <table th:object="${employee}">
-        <tr>
-            <th>社員番号</th>
-            <td th:text="*{authentication.code}"></td>
-        </tr>
+    <h1>日報 詳細ページ</h1>
+    <table th:object="${report}">
         <tr>
             <th>氏名</th>
-            <td th:text="*{name}"></td>
+            <td th:text="*{employee.name}"></td>
         </tr>
         <tr>
-            <th>権限</th>
-            <td th:text="*{authentication.role}"></td>
+            <th>日付</th>
+            <td th:text="*{reportDate}"></td>
+        </tr>
+        <tr>
+            <th>内容</th>
+            <td><pre th:text="*{content}"></pre></td>
         </tr>
         <tr>
             <th>登録日時</th>
@@ -28,8 +28,8 @@
             <td th:text="*{#temporals.format(updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
         </tr>
     </table>
-    <a th:href="@{/employee/update/{id}/(id=${id})}">この従業員情報を編集する</a>
+    <a th:href="@{/report/update/{id}/(id=${id})}">この日報を編集する</a>
     <br>
-    <a th:href="@{/employee}">一覧に戻る</a>
+    <a th:href="@{/report}">一覧に戻る</a>
 </body>
 </html>

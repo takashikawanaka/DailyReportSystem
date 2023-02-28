@@ -48,6 +48,6 @@ public class Authentication {
     private Date validDate;
 
     @OneToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", nullable = false, referencedColumnName = "id")
     private Employee employee;
 }
