@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <header th:replace="header::nav_bar"></header>
     <h1 th:text="'id : ' + ${employee.id} + ' の従業員情報 詳細ページ'"></h1>
     <table th:object="${employee}">
         <tr>

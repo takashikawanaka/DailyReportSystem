@@ -5,22 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <header>
-        <h1>日報管理システム</h1>
-        <nav>
-            <ul>
-                <li><a th:href="@{/employee}">従業員管理</a></li>
-                <li><a th:href="@{/report}">日報管理</a></li>
-                <li th:text="${username} + ' さん'"></li>
-                <li>
-                    <form method="post" name="logout" th:action="@{/logout}">
-                        <input type="hidden" value="ログアウト">
-                        <a href="javascript:logout.submit()">ログアウト</a>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <header th:replace="header::nav_bar"></header>
     <h1>日報管理システムへようこそ</h1>
     <table>
         <tr>

@@ -16,8 +16,11 @@ public class UserDetail implements UserDetails {
     private final Employee employee;
     private final List<SimpleGrantedAuthority> authorities;
 
+    public String name;
+
     public UserDetail(Employee employee) {
         this.employee = employee;
+        this.name = employee.getName();
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority(employee.getAuthentication().getRole().toString()));

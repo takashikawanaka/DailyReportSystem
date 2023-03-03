@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <header th:replace="header::nav_bar"></header>
     <h1>日報 編集ページ</h1>
     <form method="post" th:action="@{/report/update/{id}/(id=${report.id})}" th:object="${report}">
         <label for="reportDate">日付</label>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <header th:fragment="nav_bar">
+        <h1>日報管理システム</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/employee}">従業員管理</a></li>
+                <li><a th:href="@{/report}">日報管理</a></li>
+                <li th:text="${#authentication.principal.name} + ' さん'"></li>
+                <li>
+                    <form method="post" name="logout" th:action="@{/logout}">
+                        <input type="hidden" value="ログアウト">
+                        <a href="javascript:logout.submit()">ログアウト</a>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

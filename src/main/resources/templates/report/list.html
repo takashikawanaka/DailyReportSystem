@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <header th:replace="header::nav_bar"></header>
     <form method="post" th:action="@{/logout}">
         <input type="submit" value="ログアウト">
     </form>

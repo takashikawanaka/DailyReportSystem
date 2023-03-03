@@ -19,11 +19,9 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(@AuthenticationPrincipal UserDetail userDetail, Model model) {
-        model.addAttribute("username", userDetail.getEmployee().getName());
         model.addAttribute("reportlist", reportService.getReportListByEmployee(userDetail.getEmployee()));
         return "index";
     }
-
     @GetMapping("/login")
     public String getLogin() {
         return "login";

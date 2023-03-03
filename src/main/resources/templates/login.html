@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <header th:replace="header::nav_bar"></header>
     <h1>ログイン</h1>
     <p class="err" th:if="${param.error}">ユーザー名かパスワードが一致しません</p>
     <form method="post" th:action="@{/login}">
