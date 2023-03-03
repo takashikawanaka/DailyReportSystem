@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="common::head_fragment('Insert title here', ~{}, ~{})">
 <body>
     <header th:replace="header::nav_bar"></header>
-    <form method="post" th:action="@{/logout}">
-        <input type="submit" value="ログアウト">
-    </form>
     <h1>従業員一覧</h1>
     <table>
         <tr>
