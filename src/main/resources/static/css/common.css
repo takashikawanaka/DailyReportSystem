@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+body {
+    display: flex;
+    flex-flow: column;
+    background-color: #F1F1F1;
+    margin: 0;
+    min-width: 768px;
+    height:100vh;
+    align-items:stretch
+}
+
+#content {
+    margin: 25px 25px 0 25px;
+    padding: 20px 2.5% 0 2.5%;
+    background-color: white;
+    height:100%;
+}
+
+#content h1 {
+    font-size: 20px;
+}
+
