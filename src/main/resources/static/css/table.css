@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+table {
+    border-collapse: collapse;
+    border: solid 2px black;
+    width: 675px;
+}
+
+th, td {
+    border: dashed 1px;
+    padding: 10px;
+}
+
+th {
+    font-weight: normal;
+}
+
+td {
+    text-align: center;
+}
+
+#content div {
+    width: 675px;
+    text-align: right;
+    margin-top: 5px;
+}
+
+#content div a {
+    margin-right: 10px;
+}

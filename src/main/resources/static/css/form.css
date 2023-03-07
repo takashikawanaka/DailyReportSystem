@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+#content form {
+    width: 675px;
+    display: flex;
+    flex-flow: column;
+}
+
+#content form div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    align-items: center;
+    padding: 5px 0 0 0;
+    align-items: center;
+}
+
+#content form div input, #content form div select {
+    font-size: 20px;
+    height: 25px;
+    margin-left: auto;
+}
+
+#content form div select {
+    font-size: 20px;
+    height: 31px;
+    margin-left: auto;
+}
+
+#content form span {
+    font-size: 15px;
+    text-align: right;
+    color: red;
+}
+
+#content form div #submit {
+    height: 31px;
+}
+
+#content form div #readonly {
+    pointer-events: none;
+    color: #888;
+    background-color: #dbdcdd;
+    border-width: 2px;
+}
+
+#content form div textarea {
+    width: 450px;
+    min-height: 450px;
+    resize: vertical;
+    margin-left: auto;
+
+}
+
+
+#content form div div {
+    width: 125px;
+    padding: 0;
+}

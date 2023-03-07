@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::head_fragment('Insert title here', ~{}, ~{})">
+<head th:replace="common::head_fragment('Insert title here', ~{}, ~{::link})">
+<link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
 <body>
     <header th:replace="header::nav_bar"></header>
-    <h1>日報 詳細ページ</h1>
-    <table th:object="${report}">
-        <tr>
-            <th>氏名</th>
-            <td th:text="*{employee.name}"></td>
-        </tr>
-        <tr>
-            <th>日付</th>
-            <td th:text="*{reportDate}"></td>
-        </tr>
-        <tr>
-            <th>内容</th>
-            <td><pre th:text="*{content}"></pre></td>
-        </tr>
-        <tr>
-            <th>登録日時</th>
-            <td th:text="*{#temporals.format(createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
-        </tr>
-        <tr>
-            <th>更新日時</th>
-            <td th:text="*{#temporals.format(updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
-        </tr>
-    </table>
-    <a th:href="@{/report/update/{id}/(id=${id})}">この日報を編集する</a>
-    <br>
-    <a th:href="@{/report}">一覧に戻る</a>
+    <div id="content">
+        <h1>日報 詳細ページ</h1>
+        <table th:object="${report}">
+            <tr>
+                <th>氏名</th>
+                <td th:text="*{employee.name}"></td>
+            </tr>
+            <tr>
+                <th>日付</th>
+                <td th:text="*{reportDate}"></td>
+            </tr>
+            <tr>
+                <th>内容</th>
+                <td><pre th:text="*{content}"></pre></td>
+            </tr>
+            <tr>
+                <th>登録日時</th>
+                <td th:text="*{#temporals.format(createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+            </tr>
+            <tr>
+                <th>更新日時</th>
+                <td th:text="*{#temporals.format(updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+            </tr>
+        </table>
+        <div>
+            <a th:href="@{/report}">一覧に戻る</a>
+            <a th:href="@{/report/update/{id}/(id=${id})}">この日報を編集する</a>
+        </div>
+    </div>
 </body>
 </html>

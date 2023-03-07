@@ -6,11 +6,20 @@ header {
     min-width: 768px;
     height: 70px;
     background-color: #51ABDD;
+    z-index: 2;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05),
+                0px 2px 2px rgba(0, 0, 0, 0.1),
+                0px 3px 3px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
     font-size: 27px;
     margin: 0px 0px 0px 25px;
+    text-shadow: 1px 1px 1px #513c3c;
+}
+
+header a {
+    text-decoration: none;
     color: #f5fafd;
 }
 
@@ -28,11 +37,10 @@ header ul {
 header ul li {
     margin-right: 15px;
     font-size: 17px;
-    color: white;
+    color: #f5fafd;
+    text-shadow: 1px 1px 1px #513c3c;
 }
 
 header ul li a {
-    font-size: 17px;
     text-decoration: none;
-    color: white;
 }

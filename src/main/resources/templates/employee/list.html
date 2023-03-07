@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::head_fragment('Insert title here', ~{}, ~{})">
+<head th:replace="common::head_fragment('Insert title here', ~{}, ~{::link})">
+<link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
 <body>
     <header th:replace="header::nav_bar"></header>
     <div id="content">
@@ -17,7 +19,9 @@
                 <td><a th:href="@{/employee/detail/{id}/(id=${employee.id})}">詳細を見る</a></td>
             </tr>
         </table>
-        <a th:href="@{/employee/register}">新規従業員の登録</a>
+        <div>
+            <a th:href="@{/employee/register}">新規従業員の登録</a>
+        </div>
     </div>
 </body>
 </html>

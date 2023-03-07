@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::head_fragment('Insert title here', ~{}, ~{})">
+<head th:replace="common::head_fragment('Insert title here', ~{}, ~{::link})">
+<link rel="stylesheet" th:href="@{/css/form.css}">
+</head>
 <body>
     <header th:replace="header::nav_bar"></header>
-    <h1>日報 新規登録ページ</h1>
-    <form method="post" th:action="@{/report/register}" th:object="${report}">
-        <label for="reportDate">日付</label>
-        <input type="date" th:field="*{reportDate}" th:errorclass="err">
-        <span th:errors="*{reportDate}" class="err"></span>
-        <br>
-        <label for="name">氏名</label>
-        <input type="text" th:field="*{employee.name}" disabled>
-        <br>
-        <label for="title">タイトル</label>
-        <input type="text" th:field="*{title}" th:errorclass="err">
-        <span th:errors="*{title}" class="err"></span>
-        <br>
-        <label for="content">内容</label>
-        <textarea th:field="*{content}" th:errorclass="err"></textarea>
-        <span th:errors="*{content}" class="err"></span>
-        <br>
-        <input type="submit" value="登録">
-        <br>
-        <a th:href="@{/report}">一覧に戻る</a>
-    </form>
+    <div id="content">
+        <h1>日報 新規登録ページ</h1>
+        <form method="post" th:action="@{/report/register}" th:object="${report}">
+            <div>
+                <label for="reportDate">日付</label>
+                <input type="date" th:field="*{reportDate}" th:errorclass="err">
+            </div>
+            <span th:errors="*{reportDate}" class="err"></span>
+            <div>
+                <label for="name">氏名</label>
+                <input type="text" th:field="*{employee.name}" disabled>
+            </div>
+            <div>
+                <label for="title">タイトル</label>
+                <input type="text" th:field="*{title}" th:errorclass="err">
+            </div>
+            <span th:errors="*{title}" class="err"></span>
+            <div>
+                <label for="content">内容</label>
+                <textarea th:field="*{content}" th:errorclass="err"></textarea>
+            </div>
+            <span th:errors="*{content}" class="err"></span>
+            <div>
+                <a th:href="@{/report}">一覧に戻る</a>
+                <input id="submit" type="submit" value="登録">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

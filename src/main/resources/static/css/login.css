@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+body {
+    height: 98.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EFEFEF;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+#content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 1.9px 1.9px 2.5px rgba(0, 0, 0, 0.01), -1.9px 1.9px 2.5px
+        rgba(0, 0, 0, 0.01), 1.9px -1.9px 2.5px rgba(0, 0, 0, 0.01), -1.9px
+        -1.9px 2.5px rgba(0, 0, 0, 0.01), 5px 5px 6.1px rgba(0, 0, 0, 0.02),
+        -5px 5px 6.1px rgba(0, 0, 0, 0.02), 5px -5px 6.1px rgba(0, 0, 0, 0.02),
+        -5px -5px 6.1px rgba(0, 0, 0, 0.02), 8px 8px 11.4px
+        rgba(0, 0, 0, 0.03), -8px 8px 11.4px rgba(0, 0, 0, 0.03), 8px -8px
+        11.4px rgba(0, 0, 0, 0.03), -8px -8px 11.4px rgba(0, 0, 0, 0.03);
+    padding: 100px 75px 100px 75px;
+}
+
+h1 {
+    font-size: 25px;
+}
+
+
+form {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+form #submit {
+    text-align: right;
+    margin-top: 5px;
+    margin-left: auto;
+}

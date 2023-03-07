@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::head_fragment('Insert title here', ~{}, ~{})">
+<head th:replace="common::head_fragment('Insert title here', ~{}, ~{::link})">
+<link rel="stylesheet" th:href="@{/css/table.css}">
 </head>
 <body>
     <header th:replace="header::nav_bar"></header>
     <div id="content">
-        <h1>日報管理システムへようこそ</h1>
+        <h2>日報管理システムへようこそ</h2>
         <table>
             <tr>
                 <th>氏名</th>
@@ -20,8 +21,9 @@
                 <td><a th:href="@{/report/detail/{id}/(id=${report.id})}">詳細を見る</a></td>
             </tr>
         </table>
-        <a th:href="@{/report/register}">新規日報の登録</a>
-
+        <div>
+            <a th:href="@{/report/register}">新規日報の登録</a>
+        </div>
     </div>
 </body>
 </html>

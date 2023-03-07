@@ -2,12 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
 <body>
     <header th:fragment="nav_bar">
-        <h1>日報管理システム</h1>
+    <h1><a th:href="@{/}">日報管理システム</a></h1>
         <nav>
             <ul>
                 <li><a th:href="@{/employee}">従業員管理</a></li>
